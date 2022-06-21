@@ -37,7 +37,7 @@ class Cars extends Migration
                 ->nullable();
             $table->float('score')
                 ->nullable();
-            $table->integer('past_owner')
+            $table->integer('past_owner_id')
                 ->nullable();
             $table->string('recommendation', 200)
                 ->nullable();

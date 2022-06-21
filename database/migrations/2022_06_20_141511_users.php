@@ -14,11 +14,11 @@ class Users extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table){
-            $table->string('second_Name');
-            $table->integer('code_Phone', 3);
-            $table->integer('phone', 7);
-            $table->string('role');
-            $table->integer('date_of_birthday');
+//            $table->string('second_Name');
+//            $table->integer('code_Phone', 3);
+//            $table->integer('phone', 7);
+//            $table->string('role');
+//            $table->integer('date_of_birthday');
         });
     }
 
@@ -30,11 +30,11 @@ class Users extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table){
-            $table->dropColumn('second_Name');
-            $table->dropColumn('code_Phone');
-            $table->dropColumn('phone');
-            $table->dropColumn('role');
-            $table->dropColumn('date_of_birthday');
+//            $table->dropColumn('second_Name');
+//            $table->dropColumn('code_Phone');
+//            $table->dropColumn('phone');
+//            $table->dropColumn('role');
+//            $table->dropColumn('date_of_birthday');
         });
     }
 }
