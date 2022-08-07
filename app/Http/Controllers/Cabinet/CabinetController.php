@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cabinet;
 
 use App\Http\Controllers\Controller;
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -21,18 +22,24 @@ class CabinetController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request) :View
+    public function index() :View
     {
 
-//        $user = Auth::user()->getAttributes();
+        $user = Auth::user();
+        $idUser = Auth::id();
+        $cars = Car::where('owner_id', $idUser)->get();
 
-        $user = $request->user()->getAttributes();
 
 
-
-        dd($user);
-
-        return view('cabinet.cabinet');
+        return view('cabinet.cabinet',
+            [
+                'user' => $user,
+                'cars' => $cars,
+                'userId' => $idUser
+            ]
+        );
     }
+
+
 
 }

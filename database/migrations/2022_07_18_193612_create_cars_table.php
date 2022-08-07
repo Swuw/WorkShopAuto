@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Cars extends Migration
+class CreateCarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -33,7 +33,7 @@ class Cars extends Migration
                 ->nullable();
             $table->string('type_transmission', 10)
                 ->nullable();
-            $table->string('more_info', 200)
+            $table->string('more_ingo', 200)
                 ->nullable();
             $table->float('score')
                 ->nullable();
@@ -52,8 +52,6 @@ class Cars extends Migration
      */
     public function down()
     {
-        {
-            Schema::dropIfExists('cars');
-        }
+        Schema::dropIfExists('cars');
     }
 }

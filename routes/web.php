@@ -32,3 +32,8 @@ Route::middleware('auth')->group( function() {
 Auth::routes();
 Route::get('/', [App\Http\Controllers\Home\MainController::class, 'index'])
     ->name('home');
+
+Route::get('/addCar', [App\Http\Controllers\CarController::class, 'addCar'])
+    ->name('addCar');
+
+
