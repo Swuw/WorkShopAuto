@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Cabinet;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-
 
 class CabinetController extends Controller
 {
@@ -26,20 +26,31 @@ class CabinetController extends Controller
     {
 
         $user = Auth::user();
+        $role = $user->getAttribute('role');
         $idUser = Auth::id();
-        $cars = Car::where('owner_id', $idUser)->get();
+        $cars = $works = [];
+        if($role === 'user'){
+            $cars = Car::where('owner_id', $idUser)->get();
+            $carsArray = $cars->toArray();
+            foreach ($carsArray as $carItem){
+                $idCar = $carItem['id'];
+                $works["$idCar"] = Work::where('id_car', $idCar)->get();
+            }
+        } elseif ($role === 'master') {
 
+        }
 
 
         return view('cabinet.cabinet',
             [
                 'user' => $user,
                 'cars' => $cars,
-                'userId' => $idUser
+                'works' => $works,
+                'userId' => $idUser,
+                'role' => $role,
+                'errorCar' => ''
             ]
         );
     }
-
-
 
 }

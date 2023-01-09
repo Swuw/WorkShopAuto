@@ -34,15 +34,50 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div>
+                    @if ( count($cars) >= 2 )
                     You cars:
-                    @foreach( $cars as $car)
-                    <div class="car">{{ $car->manufacturer }} {{$car->year}}</div><br>
+                    @else
+                    You car:
+                    @endif
+                    @foreach( $cars as $car )
+                    <div class="car">{{ $car->manufacturer }} {{ $car->model }}, {{$car->year}}</div><br>
+                        @if(!$works["$car->id"]->isEmpty())
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Mileage</th>
+                                        <th scope="col">Type of work</th>
+                                        <th scope="col">Descriptions job</th>
+                                        <th scope="col">Recommendation</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                            @foreach($works["$car->id"] as $work)
+                                        <tr>
+                                            <th scope="row">{{ $work->created_at}}</th>
+                                            <td>{{ $work->mileage}}</td>
+                                            <td>{{ $work->type_of_work}}</td>
+                                            <td>{{ $work->descriptions_job}}</td>
+                                            <td>{{ $work->recommendation}}</td>
+                                        </tr>
+                            @endforeach
+                                    </tbody>
+                                </table>
+                        @endif
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
 
+    @if($errorCar)
+    <div class="error">
+        <div class="error-car">{{ $errorCar }}</div>
+    </div>
+    @endif
+
+    @if ( count($cars) <= 2 && $role == 'user')
     <div class="container-add ">
         <div class="add-car">
             <button class="add-car-new">Add new car</button>
@@ -119,7 +154,13 @@
             <input type="text" id="vin" name="vin" required>
             <br>
             <label for="year">Year*:</label>
-            <input type="text" id="year" name="year" required>
+            <select name="year" id="year" required>
+                @if (date('Y'))
+                    @for ($i = 1960; $i <= date('Y'); $i++)
+                        <option value="{{$i}}">{{$i}}</option>
+                    @endfor
+                @endif
+            </select>
             <br>
             <label for="fuel">Fuel*:</label>
             <select name="fuel" id="fuel" required>
@@ -152,7 +193,13 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-
+    @elseif($role != 'user')
+        <div class="container-add "></div>
+    @else
+    <div class="container-add ">
+        <div>If your need to add new car please contact with Administrator</div>
+    </div>
+    @endif
 @endsection
 
 

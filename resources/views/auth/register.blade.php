@@ -53,11 +53,11 @@
                             </div>
                         </div>
 
-{{--                        <div class="row mb-3">--}}
-{{--                            <label for="" class="col-md-4 col-form-label text-md-end">{{ __('Phone with code*') }}</label>--}}
+                        <div class="row mb-3">
+                            <label for="" class="col-md-4 col-form-label text-md-end">{{ __('Phone*') }}</label>
 
-{{--                            <div class="col-md-6">--}}
-{{--                                <div class="row">--}}
+                            <div class="col-md-6">
+
 {{--                                    <div class="col-md-4">--}}
 {{--                                        <input id="code_Phone" type="text" class="form-control @error('code_Phone') is-invalid @enderror" name="code_Phone" value="{{ old('code_Phone') }}" required autocomplete="code_Phone" placeholder="Code" autofocus>--}}
 {{--                                    </div>--}}
@@ -67,16 +67,15 @@
 {{--                                        </span>--}}
 {{--                                    @enderror--}}
 {{--                                    <div class="col-md-8">--}}
-{{--                                        <input id="phone_Number" type="text" class="form-control @error('phone_Number') is-invalid @enderror" name="phone_Number"  value="{{ old('phone_Number') }}" required autocomplete="phone_Number" placeholder="Phone" autofocus>--}}
+                                        <input id="phone_Number" type="tel" class="form-control @error('phone_Number') is-invalid @enderror" name="phone_Number"  value="{{old('phone_Number')}}" required autocomplete="phone_Number" placeholder="Phone" autofocus>
 {{--                                    </div>--}}
-{{--                                    @error('phone_Number')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                            <strong>{{ $message }}</strong>--}}
-{{--                                        </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                                    @error('phone_Number')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password*') }}</label>
