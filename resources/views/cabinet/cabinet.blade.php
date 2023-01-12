@@ -34,9 +34,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div>
-                    @if ( count($cars) >= 2 )
+                    @if ( count($cars) >= 2 && $role == 'user')
                     You cars:
-                    @else
+                    @elseif ($role == 'user')
                     You car:
                     @endif
                     @foreach( $cars as $car )
@@ -70,6 +70,37 @@
             </div>
         </div>
     </div>
+
+    @if($worksMaster)
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">CarInfo</th>
+                <th scope="col">Mileage</th>
+                <th scope="col">Type of work</th>
+                <th scope="col">Descriptions job</th>
+                <th scope="col">Remark of work</th>
+                <th scope="col">Recommendation</th>
+                <th scope="col">Spend time(h)</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach($worksMaster as $workM)
+                <tr>
+                    <th scope="row">{{ $workM->created_at }},<br> {{ $workM->updated_at }}</th>
+                    <td>{{ $carsForMaster[$workM->id_car][0]['manufacturer']}},<br> {{ $carsForMaster[$workM->id_car][0]['model']}},<br> {{ $carsForMaster[$workM->id_car][0]['year']}},<br> {{ $carsForMaster[$workM->id_car][0]['vin']}}</td>
+                    <td>{{ $workM->mileage}}</td>
+                    <td>{{ $workM->type_of_work}}</td>
+                    <td>{{ $workM->descriptions_job}}</td>
+                    <td>{{ $workM->remark_of_work}}</td>
+                    <td>{{ $workM->recommendation}}</td>
+                    <td>{{ $workM->spend_time}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
 
     @if($errorCar)
     <div class="error">

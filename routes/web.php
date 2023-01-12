@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Cabinet\CabinetController;
+use App\Http\Controllers\Home\MainController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +27,16 @@ use Illuminate\Support\Facades\Route;
 //Route::group(['middleware' => ['auth']], function() {
 Route::middleware('auth')->group( function() {
 
-    Route::get('/cabinet', [App\Http\Controllers\Cabinet\CabinetController::class, 'index'])
+    Route::get('/cabinet', [CabinetController::class, 'index'])
         ->name('cabinet');
 
 });
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\Home\MainController::class, 'index'])
+Route::get('/', [MainController::class, 'index'])
     ->name('home');
 
-Route::get('/addCar', [App\Http\Controllers\CarController::class, 'addCar'])
+Route::get('/addCar', [CarController::class, 'addCar'])
     ->name('addCar');
 
 

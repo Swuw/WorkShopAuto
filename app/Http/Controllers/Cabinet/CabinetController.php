@@ -28,7 +28,7 @@ class CabinetController extends Controller
         $user = Auth::user();
         $role = $user->getAttribute('role');
         $idUser = Auth::id();
-        $cars = $works = [];
+        $cars = $works = $worksMaster = $carsForMaster = [];
         if($role === 'user'){
             $cars = Car::where('owner_id', $idUser)->get();
             $carsArray = $cars->toArray();
@@ -37,7 +37,10 @@ class CabinetController extends Controller
                 $works["$idCar"] = Work::where('id_car', $idCar)->get();
             }
         } elseif ($role === 'master') {
-
+            $worksMaster = Work::where('id_master', $idUser)->orderBy('updated_at', 'DESC')->limit(5)->get();
+            foreach($worksMaster as $workM){
+                $carsForMaster[$workM['id_car']] = Car::where('id', $workM['id_car'])->get();
+            }
         }
 
 
@@ -46,6 +49,8 @@ class CabinetController extends Controller
                 'user' => $user,
                 'cars' => $cars,
                 'works' => $works,
+                'worksMaster' => $worksMaster,
+                'carsForMaster' => $carsForMaster,
                 'userId' => $idUser,
                 'role' => $role,
                 'errorCar' => ''
